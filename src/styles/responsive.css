@@ -1,0 +1,33 @@
+/* Custom media queries for responsive design */
+@media (max-width: 1024px) {
+  .search-form-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .property-details {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-details-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .property-images {
+    height: 250px;
+  }
+  
+  .thumbnail-grid {
+    display: none;
+  }
+}
