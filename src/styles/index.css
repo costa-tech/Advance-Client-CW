@@ -1,3 +1,4 @@
+/* Import Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,7 +19,23 @@ body {
   color: #1f2937;
 }
 
-/* Custom styles for react-tabs */
+/* Common Responsive Utilities */
+.responsive-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.responsive-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* React Tabs Styles */
 .react-tabs__tab-list {
   border-bottom: 1px solid #e5e7eb;
   margin: 0;
@@ -52,4 +69,229 @@ body {
 
 .react-tabs__tab-panel--selected {
   display: block;
+}
+
+/* Search Form Styles */
+.search-form-container {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  display: grid;
+  gap: 1.5rem;
+}
+
+@layer components {
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group.double-input {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .form-group.double-input > * {
+    flex: 1;
+  }
+
+  .search-button {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+/* Property Grid Styles */
+.property-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Property Card Styles */
+.property-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.property-card-content {
+  padding: 1rem;
+}
+
+/* Property Details Styles */
+.property-details {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.property-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.property-gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.property-info {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.property-features {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Map Component Styles */
+.map-container {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  height: 400px;
+}
+
+/* Floor Plan Styles */
+.floor-plan {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  max-height: 600px;
+}
+
+/* Favorites Grid */
+.favorites-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Navigation Styles */
+.nav-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.nav-menu {
+  display: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.nav-menu-mobile {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/* Footer positioning styles */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 2rem 0;
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 1025px) {
+  .search-form-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-form-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .map-container {
+    height: 300px;
+  }
+  
+  .property-gallery,
+  .property-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .floor-plan {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .search-form-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-group {
+    width: 100%;
+  }
+  
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-details-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .property-images {
+    height: 250px;
+  }
+  
+  .thumbnail-grid {
+    display: none;
+  }
+  
+  .property-features {
+    grid-template-columns: 1fr;
+  }
 }

@@ -18,7 +18,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1502005097973-6a7082348e28',
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85'
     ],
-    floorPlan: '/images/floorplans/plan1.jpg',
+    floorPlan: '/src/images/floorplans/plan1.jpeg',
     location: {
       lat: 51.4065,
       lng: 0.0245
@@ -43,7 +43,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1507089947368-19c1da9775ae',
       'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6'
     ],
-    floorPlan: '/images/floorplans/plan2.jpg',
+    floorPlan: '/src/images/floorplans/plan2.jpeg',
     location: {
       lat: 51.5347,
       lng: -0.1428
@@ -68,7 +68,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85',
       'https://images.unsplash.com/photo-1484101403633-562f891dc89a'
     ],
-    floorPlan: '/images/floorplans/plan3.jpg',
+    floorPlan: '/src/images/floorplans/plan3.jpeg',
     location: {
       lat: 51.4075,
       lng: 0.0255
@@ -93,7 +93,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1507089947368-19c1da9775ae',
       'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6'
     ],
-    floorPlan: '/images/floorplans/plan4.jpg',
+    floorPlan: '/src/images/floorplans/plan4.jpeg',
     location: {
       lat: 51.5347,
       lng: -0.1428
@@ -118,7 +118,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1502005097973-6a7082348e28',
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85'
     ],
-    floorPlan: '/images/floorplans/plan5.jpg',
+    floorPlan: '/src/images/floorplans/plan5.jpeg',
     location: {
       lat: 51.4055,
       lng: 0.0235
@@ -143,7 +143,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1600607688969-a5bfcd646154',
       'https://images.unsplash.com/photo-1600607688001-bab6e6275f15'
     ],
-    floorPlan: '/images/floorplans/plan6.jpg',
+    floorPlan: '/src/images/floorplans/plan6.jpeg',
     location: {
       lat: 51.4975,
       lng: -0.1357
@@ -168,7 +168,7 @@ export const properties = [
       'https://images.unsplash.com/photo-1560448090-7f6cad404284',
       'https://images.unsplash.com/photo-1560448074-5d6c77e2c96c'
     ],
-    floorPlan: '/images/floorplans/plan7.jpg',
+    floorPlan: '/src/images/floorplans/plan7.jpeg',
     location: {
       lat: 51.4988,
       lng: -0.0901

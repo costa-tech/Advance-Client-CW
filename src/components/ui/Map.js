@@ -1,26 +1,16 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-
-const containerStyle = {
-  width: '100%',
-  height: '400px'
-};
 
 export default function Map({ lat, lng }) {
-  const center = {
-    lat,
-    lng
-  };
-
   return (
-    <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={15}
-      >
-        <Marker position={center} />
-      </GoogleMap>
-    </LoadScript>
+    <iframe
+      title="Property Location"
+      width="100%"
+      height="400"
+      frameBorder="0"
+      scrolling="no"
+      marginHeight="0"
+      marginWidth="0"
+      src={`https://www.openstreetmap.org/export/embed.html?bbox=${lng-0.01}%2C${lat-0.01}%2C${lng+0.01}%2C${lat+0.01}&layer=mapnik&marker=${lat}%2C${lng}`}
+    />
   );
 }

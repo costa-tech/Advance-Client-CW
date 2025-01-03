@@ -6,13 +6,12 @@ import PropertyList from './components/PropertyList';
 import PropertyDetails from './components/property/PropertyDetails';
 import SearchForm from './components/SearchForm';
 import FavoritesList from './components/favorites/FavoritesList';
-import FavoritesPage from './pages/FavoritesPage';
 import { getFavorites, saveFavorites } from './utils/favorites';
 import { sanitizeInput } from './utils/security';
 import { properties } from './data/properties';
 
 // Wrapper component for PropertyDetails to handle route params
-const PropertyDetailsWrapper = () => {
+const PropertyDetailsWrapper = ({ favorites, onToggleFavorite }) => {
   const { id } = useParams();
   const property = properties.find(p => p.id === id);
   
@@ -20,7 +19,13 @@ const PropertyDetailsWrapper = () => {
     return <div>Property not found</div>;
   }
   
-  return <PropertyDetails property={property} />;
+  return (
+    <PropertyDetails 
+      property={property} 
+      isFavorite={favorites.has(property.id)}
+      onToggleFavorite={onToggleFavorite}
+    />
+  );
 };
 
 export default function App() {
@@ -112,6 +117,18 @@ export default function App() {
             </nav>
           </header>
 
+          {/* Hero Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Find Your Dream Home Today
+              </h1>
+              <p className="text-xl text-blue-100">
+                Discover the perfect property that matches your lifestyle
+              </p>
+            </div>
+          </div>
+
           <Routes>
             <Route 
               path="/favorites" 
@@ -155,7 +172,7 @@ export default function App() {
             />
             <Route 
               path="/property/:id" 
-              element={<PropertyDetailsWrapper />} 
+              element={<PropertyDetailsWrapper favorites={favoritesSet} onToggleFavorite={handleToggleFavorite} />} 
             />
           </Routes>
 

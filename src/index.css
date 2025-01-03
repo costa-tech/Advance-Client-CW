@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Drag and drop styles */
+.drag-active\:flex {
+  display: none;
+}
+
+[data-dragging="true"] .drag-active\:flex {
+  display: flex;
+}
+
+.remove-zone {
+  transition: all 0.2s ease-in-out;
+}
+
+.remove-zone[data-droppable="true"] {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-style: solid;
+}

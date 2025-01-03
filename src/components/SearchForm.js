@@ -11,7 +11,7 @@ export default function SearchForm({ onSearch }) {
     maxBedrooms: '',
     dateFrom: '',
     dateTo: '',
-    postcode: '',
+    postcode: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -19,20 +19,22 @@ export default function SearchForm({ onSearch }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (criteria.minPrice && !validatePrice(criteria.minPrice)) {
-      newErrors.minPrice = 'Please enter a valid price';
+    // Validate price range
+    if (criteria.minPrice && criteria.maxPrice) {
+      const priceError = validatePrice(criteria.minPrice, criteria.maxPrice);
+      if (priceError) newErrors.maxPrice = priceError;
     }
-    if (criteria.maxPrice && !validatePrice(criteria.maxPrice)) {
-      newErrors.maxPrice = 'Please enter a valid price';
+
+    // Validate bedrooms range
+    if (criteria.minBedrooms && criteria.maxBedrooms) {
+      const bedroomsError = validateBedrooms(criteria.minBedrooms, criteria.maxBedrooms);
+      if (bedroomsError) newErrors.maxBedrooms = bedroomsError;
     }
-    if (criteria.minBedrooms && !validateBedrooms(criteria.minBedrooms)) {
-      newErrors.minBedrooms = 'Please enter a valid number of bedrooms';
-    }
-    if (criteria.maxBedrooms && !validateBedrooms(criteria.maxBedrooms)) {
-      newErrors.maxBedrooms = 'Please enter a valid number of bedrooms';
-    }
-    if (criteria.postcode && !validatePostcode(criteria.postcode)) {
-      newErrors.postcode = 'Please enter a valid postcode';
+
+    // Validate postcode
+    if (criteria.postcode) {
+      const postcodeError = validatePostcode(criteria.postcode);
+      if (postcodeError) newErrors.postcode = postcodeError;
     }
 
     setErrors(newErrors);
@@ -48,21 +50,15 @@ export default function SearchForm({ onSearch }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCriteria(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setCriteria(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md search-form-container">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="space-y-2">
           <label className="flex items-center text-sm font-medium text-gray-700">
