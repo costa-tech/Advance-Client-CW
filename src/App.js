@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, Link } from 'react-router-dom';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 import { theme } from './styles/theme';
 import PropertyList from './components/PropertyList';
 import PropertyDetails from './components/property/PropertyDetails';
@@ -32,11 +33,65 @@ export default function App() {
   const [searchResults, setSearchResults] = useState(properties);
   const [favorites, setFavorites] = useState(() => getFavorites());
   const favoritesSet = new Set(favorites.map(f => f.id));
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(KeyboardSensor)
   );
+
+  const handleDragEnd = useCallback((event) => {
+    const { active, over } = event;
+    console.log('Drag end:', { active, over });
+
+    // Handle dropping a property into favorites
+    if (active.data.current?.type === 'property' && over?.id === 'favorites-droppable') {
+      const property = active.data.current.property;
+      setFavorites(prevFavorites => {
+        if (!prevFavorites.some(fav => fav.id === property.id)) {
+          const sanitizedProperty = {
+            ...property,
+            title: sanitizeInput(property.title),
+            description: sanitizeInput(property.description),
+          };
+          const newFavorites = [...prevFavorites, sanitizedProperty];
+          saveFavorites(newFavorites);
+          return newFavorites;
+        }
+        return prevFavorites;
+      });
+      return;
+    }
+    
+    // Handle reordering favorites
+    if (active.data.current?.type === 'favorite' && over?.id === 'favorites-droppable') {
+      setFavorites(prevFavorites => {
+        const oldIndex = prevFavorites.findIndex(fav => fav.id === active.id);
+        const newIndex = prevFavorites.findIndex(fav => fav.id === over.id);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const newFavorites = arrayMove(prevFavorites, oldIndex, newIndex);
+          saveFavorites(newFavorites);
+          return newFavorites;
+        }
+        return prevFavorites;
+      });
+      return;
+    }
+
+    // Handle removing favorite by dragging outside
+    if (active.data.current?.type === 'favorite' && (!over || over.id !== 'favorites-droppable')) {
+      console.log('Removing favorite:', active.id);
+      setFavorites(prevFavorites => {
+        const newFavorites = prevFavorites.filter(fav => fav.id !== active.id);
+        saveFavorites(newFavorites);
+        return newFavorites;
+      });
+    }
+  }, []);
 
   const handleSearch = useCallback((criteria) => {
     let filtered = properties;
@@ -63,24 +118,6 @@ export default function App() {
     setSearchResults(filtered);
   }, []);
 
-  const handleDragEnd = useCallback((event) => {
-    const { active, over } = event;
-    
-    if (over && over.id === 'favorites-droppable') {
-      const draggedProperty = properties.find(p => p.id === active.id);
-      if (draggedProperty && !favoritesSet.has(draggedProperty.id)) {
-        const sanitizedProperty = {
-          ...draggedProperty,
-          title: sanitizeInput(draggedProperty.title),
-          description: sanitizeInput(draggedProperty.description),
-        };
-        const newFavorites = [...favorites, sanitizedProperty];
-        setFavorites(newFavorites);
-        saveFavorites(newFavorites);
-      }
-    }
-  }, [favorites, favoritesSet]);
-
   const handleToggleFavorite = useCallback((id) => {
     const property = properties.find(p => p.id === id);
     if (property) {
@@ -95,6 +132,10 @@ export default function App() {
     }
   }, [favorites, favoritesSet]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <Router>
       <DndContext 
@@ -107,7 +148,7 @@ export default function App() {
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16">
                 <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                  Property Search
+                  PropQuest
                 </Link>
                 <div className="flex items-center space-x-4">
                   <Link to="/" className="text-gray-600 hover:text-gray-900">Home</Link>
@@ -179,7 +220,7 @@ export default function App() {
           <footer className="bg-white border-t border-gray-200 mt-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="text-center text-gray-500">
-                <p>&copy; {new Date().getFullYear()} Property Search. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} PropQuest. All rights reserved.</p>
               </div>
             </div>
           </footer>
