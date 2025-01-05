@@ -19,6 +19,24 @@ body {
   color: #1f2937;
 }
 
+/* Drag and drop styles */
+.drag-active\:flex {
+  display: none;
+}
+
+[data-dragging="true"] .drag-active\:flex {
+  display: flex;
+}
+
+.remove-zone {
+  transition: all 0.2s ease-in-out;
+}
+
+.remove-zone[data-droppable="true"] {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-style: solid;
+}
+
 /* Common Responsive Utilities */
 .responsive-padding {
   padding-left: 1rem;
@@ -33,6 +51,35 @@ body {
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Navigation Styles */
+.nav-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.nav-menu {
+  display: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.nav-menu-mobile {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 /* React Tabs Styles */
@@ -177,35 +224,6 @@ body {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
-
-/* Navigation Styles */
-.nav-container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.nav-menu {
-  display: none;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
-.nav-menu-mobile {
-  display: flex;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
 }
 
 /* Footer positioning styles */

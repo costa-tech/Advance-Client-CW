@@ -3,7 +3,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import DraggableFavoriteItem from './DraggableFavoriteItem';
 import { Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, Trash2 } from 'lucide-react';
 
 export default function FavoritesList({ favorites, setFavorites }) {
   const { setNodeRef, isOver } = useDroppable({
@@ -11,6 +11,12 @@ export default function FavoritesList({ favorites, setFavorites }) {
   });
 
   const isInFavoritesPage = window.location.pathname === '/favorites';
+
+  const handleClearAll = () => {
+    if (window.confirm('Are you sure you want to clear all favorites?')) {
+      setFavorites([]);
+    }
+  };
 
   return (
     <div
@@ -23,11 +29,23 @@ export default function FavoritesList({ favorites, setFavorites }) {
     >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Favorites</h2>
-        {favorites.length > 0 && (
-          <div className="text-sm text-gray-500">
-            Drag items out to remove
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          {favorites.length > 0 && (
+            <>
+              <div className="text-sm text-gray-500">
+                Drag items out to remove
+              </div>
+              <button
+                onClick={handleClearAll}
+                className="flex items-center gap-1 px-2 py-1 text-sm text-red-600 hover:text-red-700 transition-colors"
+                title="Clear all favorites"
+              >
+                <Trash2 className="w-4 h-4" />
+                Clear All
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
       <SortableContext items={favorites.map(f => f.id)} strategy={verticalListSortingStrategy}>

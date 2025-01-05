@@ -1,6 +1,24 @@
-import React, { useState } from 'react';
-import { Search, Home, Calendar, PoundSterling } from 'lucide-react';
-import { validatePrice, validateBedrooms, validatePostcode } from '../utils/validation';
+import React, { useState } from "react";
+import { Search, Home, Calendar, PoundSterling } from "lucide-react";
+
+// Validation functions
+const validatePostcode = (postcode) => {
+  if (!postcode) return true;
+  const postcodeRegex = /^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?$/;
+  return postcodeRegex.test(postcode);
+};
+
+const validatePrice = (price) => {
+  if (!price) return true;
+  const numPrice = Number(price);
+  return !isNaN(numPrice) && numPrice >= 0;
+};
+
+const validateBedrooms = (bedrooms) => {
+  if (!bedrooms) return true;
+  const numBedrooms = Number(bedrooms);
+  return !isNaN(numBedrooms) && numBedrooms >= 0 && Number.isInteger(numBedrooms);
+};
 
 export default function SearchForm({ onSearch }) {
   const [criteria, setCriteria] = useState({
@@ -21,20 +39,21 @@ export default function SearchForm({ onSearch }) {
 
     // Validate price range
     if (criteria.minPrice && criteria.maxPrice) {
-      const priceError = validatePrice(criteria.minPrice, criteria.maxPrice);
-      if (priceError) newErrors.maxPrice = priceError;
+      if (!validatePrice(criteria.minPrice)) newErrors.minPrice = 'Minimum price must be a non-negative number';
+      if (!validatePrice(criteria.maxPrice)) newErrors.maxPrice = 'Maximum price must be a non-negative number';
+      if (Number(criteria.minPrice) > Number(criteria.maxPrice)) newErrors.maxPrice = 'Minimum price cannot be greater than maximum price';
     }
 
     // Validate bedrooms range
     if (criteria.minBedrooms && criteria.maxBedrooms) {
-      const bedroomsError = validateBedrooms(criteria.minBedrooms, criteria.maxBedrooms);
-      if (bedroomsError) newErrors.maxBedrooms = bedroomsError;
+      if (!validateBedrooms(criteria.minBedrooms)) newErrors.minBedrooms = 'Minimum bedrooms must be a non-negative integer';
+      if (!validateBedrooms(criteria.maxBedrooms)) newErrors.maxBedrooms = 'Maximum bedrooms must be a non-negative integer';
+      if (Number(criteria.minBedrooms) > Number(criteria.maxBedrooms)) newErrors.maxBedrooms = 'Minimum bedrooms cannot be greater than maximum bedrooms';
     }
 
     // Validate postcode
     if (criteria.postcode) {
-      const postcodeError = validatePostcode(criteria.postcode);
-      if (postcodeError) newErrors.postcode = postcodeError;
+      if (!validatePostcode(criteria.postcode)) newErrors.postcode = 'Invalid postcode';
     }
 
     setErrors(newErrors);

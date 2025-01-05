@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, Link } from 'react-router-dom';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { theme } from './styles/theme';
 import PropertyList from './components/PropertyList';
 import PropertyDetails from './components/property/PropertyDetails';
 import SearchForm from './components/SearchForm';
@@ -33,7 +32,6 @@ export default function App() {
   const [searchResults, setSearchResults] = useState(properties);
   const [favorites, setFavorites] = useState(() => getFavorites());
   const favoritesSet = new Set(favorites.map(f => f.id));
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -93,6 +91,10 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    saveFavorites(favorites);
+  }, [favorites]);
+
   const handleSearch = useCallback((criteria) => {
     let filtered = properties;
 
@@ -131,10 +133,6 @@ export default function App() {
       saveFavorites(newFavorites);
     }
   }, [favorites, favoritesSet]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   return (
     <Router>

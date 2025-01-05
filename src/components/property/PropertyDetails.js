@@ -3,7 +3,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Heart, MapPin, Bed, Home, Calendar } from 'lucide-react';
 import ImageGallery from '../ui/ImageGallery';
-import Map from '../ui/Map';
 import { formatPrice, formatDate } from '../../utils/formatters';
 
 export default function PropertyDetails({ property, isFavorite, onToggleFavorite }) {
