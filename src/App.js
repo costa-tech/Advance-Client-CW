@@ -116,6 +116,21 @@ export default function App() {
     if (criteria.postcode) {
       filtered = filtered.filter(p => p.postcode.toLowerCase().includes(criteria.postcode.toLowerCase()));
     }
+    // Add date filtering based on dateAdded
+    if (criteria.dateFrom) {
+      const fromDate = new Date(criteria.dateFrom);
+      filtered = filtered.filter(p => {
+        const propertyDate = new Date(p.dateAdded);
+        return propertyDate >= fromDate;
+      });
+    }
+    if (criteria.dateTo) {
+      const toDate = new Date(criteria.dateTo);
+      filtered = filtered.filter(p => {
+        const propertyDate = new Date(p.dateAdded);
+        return propertyDate <= toDate;
+      });
+    }
 
     setSearchResults(filtered);
   }, []);
@@ -141,7 +156,7 @@ export default function App() {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <div className="min-h-screen" style={{ backgroundColor: '#9a4896' }}>
+        <div className="min-h-screen" style={{ backgroundColor: '#add8e6' }}>
           <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16">
