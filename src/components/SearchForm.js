@@ -20,6 +20,12 @@ const validateBedrooms = (bedrooms) => {
   return !isNaN(numBedrooms) && numBedrooms >= 0 && Number.isInteger(numBedrooms);
 };
 
+const validateDate = (date) => {
+  if (!date) return true;
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  return dateRegex.test(date);
+};
+
 export default function SearchForm({ onSearch }) {
   const [criteria, setCriteria] = useState({
     type: '',
@@ -54,6 +60,13 @@ export default function SearchForm({ onSearch }) {
     // Validate postcode
     if (criteria.postcode) {
       if (!validatePostcode(criteria.postcode)) newErrors.postcode = 'Invalid postcode';
+    }
+
+    // Validate date range
+    if (criteria.dateFrom && criteria.dateTo) {
+      if (!validateDate(criteria.dateFrom)) newErrors.dateFrom = 'Invalid date format';
+      if (!validateDate(criteria.dateTo)) newErrors.dateTo = 'Invalid date format';
+      if (new Date(criteria.dateFrom) > new Date(criteria.dateTo)) newErrors.dateTo = 'Start date cannot be after end date';
     }
 
     setErrors(newErrors);
@@ -176,23 +189,32 @@ export default function SearchForm({ onSearch }) {
         <div className="space-y-2">
           <label className="flex items-center text-sm font-medium text-gray-700">
             <Calendar className="w-4 h-4 mr-2" />
-            Date Added
+            Date Range
           </label>
-          <div className="flex space-x-2">
-            <input
-              type="date"
-              name="dateFrom"
-              value={criteria.dateFrom}
-              onChange={handleChange}
-              className="w-1/2 p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="date"
-              name="dateTo"
-              value={criteria.dateTo}
-              onChange={handleChange}
-              className="w-1/2 p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500"
-            />
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <input
+                type="date"
+                name="dateFrom"
+                value={criteria.dateFrom}
+                onChange={handleChange}
+                className="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500"
+                placeholder="From"
+              />
+              {errors.dateFrom && <p className="text-red-500 text-xs mt-1">{errors.dateFrom}</p>}
+            </div>
+            <div>
+              <input
+                type="date"
+                name="dateTo"
+                value={criteria.dateTo}
+                onChange={handleChange}
+                className="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500"
+                placeholder="To"
+                min={criteria.dateFrom}
+              />
+              {errors.dateTo && <p className="text-red-500 text-xs mt-1">{errors.dateTo}</p>}
+            </div>
           </div>
         </div>
 

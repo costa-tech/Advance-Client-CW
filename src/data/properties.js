@@ -9,9 +9,9 @@ export const properties = [
     title: 'Stunning 4 Bedroom Victorian House',
     shortDescription: 'Beautiful Victorian property with original features and modern amenities',
     longDescription: 'This exceptional Victorian house offers the perfect blend of period features and modern living. The property features high ceilings, original fireplaces, and a recently renovated kitchen-diner that opens onto a landscaped garden.',
-    mainImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
+    mainImage: '/images/houses/house1.jpeg',
     images: [
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
+      '/images/houses/house1.jpeg',
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
       'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6',
       'https://images.unsplash.com/photo-1484154218962-a197022b5858',
@@ -20,7 +20,7 @@ export const properties = [
     ],
     floorPlan: '/src/images/floorplans/plan1.jpeg',
     location: {
-      lat: 51.4065,
+      lat: 51.4065,  // Bromley
       lng: 0.0245
     }
   },
@@ -34,9 +34,9 @@ export const properties = [
     title: 'Modern 2 Bedroom Apartment',
     shortDescription: 'Contemporary apartment in prime London location',
     longDescription: 'Stylish and modern apartment featuring an open-plan living space, floor-to-ceiling windows, and a private balcony with city views. The property includes high-end appliances and secure parking.',
-    mainImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',
+    mainImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
     images: [
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',
+      'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
       'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688',
       'https://images.unsplash.com/photo-1493809842364-78817add7ffb',
       'https://images.unsplash.com/photo-1484101403633-562f891dc89a',
@@ -45,14 +45,14 @@ export const properties = [
     ],
     floorPlan: '/src/images/floorplans/plan2.jpeg',
     location: {
-      lat: 51.5347,
+      lat: 51.5347,  // Camden Town
       lng: -0.1428
     }
   },
   {
     id: '3',
     type: 'house',
-    price: 925000,
+    price: 850000,
     bedrooms: 5,
     dateAdded: '2024-03-13',
     postcode: 'BR1',
@@ -70,8 +70,8 @@ export const properties = [
     ],
     floorPlan: '/src/images/floorplans/plan3.jpeg',
     location: {
-      lat: 51.4075,
-      lng: 0.0255
+      lat: 51.4613,  // Greenwich
+      lng: -0.0098
     }
   },
   {
@@ -84,9 +84,9 @@ export const properties = [
     title: 'Stylish Studio Apartment',
     shortDescription: 'Contemporary studio in central location',
     longDescription: 'Perfect for professionals, this modern studio apartment offers smart living space with high-quality finishes throughout. Features include integrated appliances, underfloor heating, and a private balcony.',
-    mainImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',
+    mainImage: '/images/houses/house4.jpeg',
     images: [
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',
+      '/images/houses/house4.jpeg',
       'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688',
       'https://images.unsplash.com/photo-1493809842364-78817add7ffb',
       'https://images.unsplash.com/photo-1484101403633-562f891dc89a',
@@ -95,8 +95,8 @@ export const properties = [
     ],
     floorPlan: '/src/images/floorplans/plan4.jpeg',
     location: {
-      lat: 51.5347,
-      lng: -0.1428
+      lat: 51.5074,  // Covent Garden
+      lng: -0.1278
     }
   },
   {
@@ -109,9 +109,9 @@ export const properties = [
     title: 'Charming 3 Bedroom Semi-Detached',
     shortDescription: 'Well-maintained family home in quiet neighborhood',
     longDescription: 'This delightful semi-detached house offers comfortable family living with a modern kitchen, separate living room, and conservatory. The property benefits from off-street parking and a south-facing garden.',
-    mainImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
+    mainImage: '/images/houses/house5.jpeg',
     images: [
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
+      '/images/houses/house5.jpeg',
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
       'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6',
       'https://images.unsplash.com/photo-1484154218962-a197022b5858',
@@ -120,7 +120,7 @@ export const properties = [
     ],
     floorPlan: '/src/images/floorplans/plan5.jpeg',
     location: {
-      lat: 51.4055,
+      lat: 51.4055,  // Bromley Common
       lng: 0.0235
     }
   },

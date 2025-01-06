@@ -1,48 +1,66 @@
-# Real Estate Application
+# Real Estate Property Search Application
 
-This is a React-based real estate application that allows users to search for properties, view property details, and manage their favorite properties using drag-and-drop functionality.
+A modern real estate property search application built with React, featuring an interactive map interface and advanced search capabilities.
 
 ## Features
 
-- **Property Search**: Users can search for properties based on criteria like price, bedrooms, and postcode.
-- **Property Details**: Detailed information about each property, including images and descriptions.
-- **Favorites Management**: Users can add properties to their favorites, reorder them, and remove them using drag-and-drop.
+- **Property Listings**: Browse through available properties with detailed information
+- **Interactive Maps**: View property locations using Google Maps integration
+- **Advanced Search**: Filter properties by:
+  - Price range
+  - Number of bedrooms
+  - Property type
+  - Date added
+- **Property Details**: View comprehensive property information including:
+  - High-quality images with gallery view
+  - Detailed descriptions
+  - Location on map
+  - Property specifications
+- **Favorites System**: Save and manage favorite properties
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+## Technologies Used
+
+- React 18
+- Tailwind CSS for styling
+- Google Maps API for location services
+- React Router for navigation
+- Vite for build tooling
+
+## Prerequisites
+
+Before running this application, make sure you have:
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- A Google Maps API key
 
 ## Installation
 
-To run this application locally, follow these steps:
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-
-2. **Install dependencies**:
+1. Install dependencies:
    ```bash
    npm install
    ```
 
-3. **Start the development server**:
+2. Start the development server:
    ```bash
    npm run dev
    ```
 
-## Additional Dependencies
+## Key Components
 
-The application uses the following additional dependencies:
-
-- **React Router**: For handling navigation between different pages of the application.
-- **@dnd-kit**: For implementing drag-and-drop functionality in the favorites list.
-- **Tailwind CSS**: For utility-first styling of the application.
-- **Lucide React**: For using icon components in the application.
-- **React Tabs**: For creating tabbed interfaces in the property details.
+- `PropertyDetails`: Displays detailed information about a property
+- `SearchForm`: Handles property search and filtering
+- `Map`: Integrates Google Maps for property location display
+- `ImageGallery`: Manages property image displays
+- `FavoriteButton`: Handles favorite property functionality
 
 ## Configuration
 
-- **tailwind.config.js**: Configure Tailwind CSS settings.
-- **.env**: Add any environment variables if needed.
+The application requires the following configuration:
 
-## License
+1. Google Maps API key in the Map component
+2. Content Security Policy in index.html for external resources
+3. Environment variables for API endpoints (if applicable)
 
-This project is licensed under the MIT License.
+
